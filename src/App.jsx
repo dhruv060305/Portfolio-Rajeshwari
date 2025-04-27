@@ -1,6 +1,7 @@
 import './App.css'
 import Main from './Pages/Main'
 import Nav from './Pages/Nav'
+import Secondsection from './Pages/Secondsection'
 
 
 function App() {
@@ -10,7 +11,8 @@ function App() {
 
     <>
     <Nav></Nav>
-    <Main></Main>
+    <Main></Main> 
+    <Secondsection></Secondsection>
     </>
 
 
