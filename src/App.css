@@ -7,3 +7,14 @@ body{
 }
 
 
+.custom-cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background-color: black;
+    border-radius: 50%;
+    pointer-events: none; /* so it doesn't block clicking */
+    transform: translate(-50%, -50%); /* center the circle */
+    z-index: 9999;
+}
+
