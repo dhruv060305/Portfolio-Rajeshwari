@@ -4,7 +4,7 @@ import Nav from './Pages/Nav'
 import Secondsection from './Pages/Secondsection'
 import CustomCursor from './Animations/CustomCursor';
 import ScrollEffect from './Animations/ScrollEffect';
-import AudioPlayer from './Animations/AudioPlayer';
+
 import CountUp from './Animations/CountUp';
 import React, { useState, useEffect } from 'react';
 
@@ -29,7 +29,7 @@ function App() {
 
     <div className='cursor-none'>
       <CustomCursor></CustomCursor>
-      <AudioPlayer />
+      
 
       {/* Loading Screen */}
       {loading && (

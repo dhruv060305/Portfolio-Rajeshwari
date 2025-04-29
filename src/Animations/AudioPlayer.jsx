@@ -1,37 +1,85 @@
-import React, { useEffect, useRef } from 'react';
-import Audio from '../Assets/timeless120.mp3'; // Adjust the path to your audio file
+import React, { useEffect, useRef, useState } from 'react';
+import Audio from '../Assets/timeless120.mp3';
 
-function AudioPlayer() {
+export default function AudioPlayer() {
   const audioRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const [duration, setDuration] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
 
   useEffect(() => {
-    // Start playing the audio muted when the component mounts
-    if (audioRef.current) {
-      audioRef.current.muted = true; // Start muted
-      audioRef.current.play();
+    const audio = audioRef.current;
+    if (!audio) return;
 
-      // Unmute the audio after 2 seconds
-      setTimeout(() => {
-        audioRef.current.muted = false; // Unmute after delay
-      }, 2000); // Adjust this delay time if necessary
+    audio.volume = 0.5;
+    audio.loop = true;
 
-      // Optionally, loop the music and adjust volume
-      audioRef.current.loop = true;
-      // audioRef.current.volume = 0.5; // Set volume (0 to 1)
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => setIsPlaying(true))
+        .catch((err) => console.warn("Autoplay blocked:", err));
     }
 
-    // Cleanup when component unmounts (stop music)
+    const updateTime = () => setCurrentTime(audio.currentTime);
+    const setAudioDuration = () => setDuration(audio.duration);
+
+    audio.addEventListener('timeupdate', updateTime);
+    audio.addEventListener('loadedmetadata', setAudioDuration);
+
     return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.currentTime = 0; // Reset music to start
-      }
+      audio.removeEventListener('timeupdate', updateTime);
+      audio.removeEventListener('loadedmetadata', setAudioDuration);
     };
   }, []);
 
+  const togglePlay = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (isPlaying) {
+      audio.pause();
+    } else {
+      audio.play().catch(console.error);
+    }
+    setIsPlaying(!isPlaying);
+  };
+
+  const toggleMute = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    audio.muted = !isMuted;
+    setIsMuted(!isMuted);
+  };
+
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60)
+      .toString()
+      .padStart(2, '0');
+    return `${minutes}:${seconds}`;
+  };
+
+  const remainingTime = duration - currentTime;
+
   return (
-    <audio ref={audioRef} src={Audio} preload="auto" />
+    <div className="flex items-center gap-3 text-black text-sm">
+      <audio ref={audioRef} src={Audio} preload="auto" />
+      <button
+        onClick={togglePlay}
+        className="px-2 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded"
+      >
+        {isPlaying ? 'Pause' : 'Play'}
+      </button>
+      <button
+        onClick={toggleMute}
+        className="px-2 py-1 bg-gray-700 hover:bg-gray-800 text-white rounded"
+      >
+        {isMuted ? 'Unmute' : 'Mute'}
+      </button>
+      <span className="text-xs text-gray-700">{formatTime(remainingTime)} left</span>
+    </div>
   );
 }
-
-export default AudioPlayer;
