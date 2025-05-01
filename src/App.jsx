@@ -4,6 +4,7 @@ import Nav from './Pages/Nav'
 import Secondsection from './Pages/Secondsection'
 import CustomCursor from './Animations/CustomCursor';
 import ScrollEffect from './Animations/ScrollEffect';
+import ScrollFadeIn from './Animations/ScrollFadeIn';
 
 import CountUp from './Animations/CountUp';
 import React, { useState, useEffect } from 'react';
@@ -62,13 +63,12 @@ function App() {
 
       {/* Main Content after loading */}
       {!loading && (
-        <>
-
-          <ScrollEffect />
-          <Nav></Nav>
-          <Main></Main>
-          <Secondsection></Secondsection>
-        </>
+       <>
+       <ScrollEffect />
+       <ScrollFadeIn><Nav /></ScrollFadeIn>
+       <ScrollFadeIn><Main /></ScrollFadeIn>
+       <ScrollFadeIn><Secondsection /></ScrollFadeIn>
+     </>
       )}
     </div>
 
