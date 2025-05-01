@@ -8,24 +8,16 @@ export default function Nav() {
         setIsOpen(!isOpen);
     };
 
-    const [colorIndex, setColorIndex] = useState(0);
-    const colors = ['red', 'blue', 'green', 'purple', 'orange'];
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setColorIndex((prev) => (prev + 1) % colors.length);
-        }, 1000);
-        return () => clearInterval(interval);
-    }, []);
+   
 
 
 
     return (
-        <div className="w-full min-h-16 flex flex-col md:flex-row justify-between items-center px-6 md:px-10" style={{ backgroundColor: '#F8F8E1' }}>
+        <div className="w-full min-h-16 flex  flex-col md:flex-row justify-between items-center px-6 md:px-10" style={{ backgroundColor: '#F8F8E1' }}>
 
             {/* Logo */}
             <div className="flex justify-between items-center ml-0 w-full md:w-auto">
-                <h1 className="text-black text-2xl mr-3"><span style={{ color: colors[colorIndex], transition: 'color 0.5s ease-in-out' }}>P</span>ortfolio</h1>
+                <h1 className="text-black text-2xl mr-3"><p> Portfolio</p> </h1>
                 <div>
 
                     <AudioPlayer />

@@ -18,7 +18,7 @@ function CustomCursor() {
 
   return (
     <div
-      className="custom-cursor"
+      className="custom-cursor opacity-60"
       style={{
         left: `${position.x}px`,
         top: `${position.y}px`,

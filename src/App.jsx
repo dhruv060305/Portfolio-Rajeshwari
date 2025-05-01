@@ -15,12 +15,19 @@ import React, { useState, useEffect } from 'react';
 function App() {
 
   const [loading, setLoading] = useState(true);
+  const [showLoader, setShowLoader] = useState(true);
 
   useEffect(() => {
-    // Simulate a loading delay (e.g., fetching data or resources)
-    setTimeout(() => {
-      setLoading(false); // Set loading to false after 3 seconds (or when content is ready)
-    }, 3000); // You can adjust the delay based on your needs (e.g., waiting for API response)
+    const timer = setTimeout(() => {
+      setLoading(false);
+
+      
+      setTimeout(() => {
+        setShowLoader(false);
+      }, 700); 
+    }, 3000);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -29,20 +36,23 @@ function App() {
 
     <div className='cursor-none'>
       <CustomCursor></CustomCursor>
-      
+
 
       {/* Loading Screen */}
-      {loading && (
-        <div className="loading-screen h-screen w-full flex text-4xl  justify-center items-center"  style={{ backgroundColor: '#F8F8E1' }}>
+      {showLoader && (
+        <div
+          className={`loading-screen h-screen w-full flex text-4xl justify-center items-center fixed top-0 left-0 transition-transform duration-700 ease-in-out ${!loading ? '-translate-y-full' : ''
+            }`}
+          style={{ backgroundColor: '#000000', zIndex: 50 }}
+        >
           <CountUp
             from={0}
             to={100}
             separator=","
             direction="up"
             duration={1}
-            className="count-up-text"
+            className="count-up-text text-amber-50"
           />
-
         </div>
       )}
 
