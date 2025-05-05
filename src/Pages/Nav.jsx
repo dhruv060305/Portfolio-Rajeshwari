@@ -17,7 +17,7 @@ export default function Nav() {
 
             {/* Logo */}
             <div className="flex justify-between items-center ml-0 w-full md:w-auto">
-                <h1 className="text-black text-2xl mr-3"><p> Portfolio</p> </h1>
+                <h1 className="text-black text-2xl mr-3"><p> {'{ '}Portfolio {'}'}</p> </h1>
                 <div>
 
                     <AudioPlayer />

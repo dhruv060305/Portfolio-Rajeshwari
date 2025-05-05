@@ -2,6 +2,7 @@ import './App.css'
 import Main from './Pages/Main'
 import Nav from './Pages/Nav'
 import Secondsection from './Pages/Secondsection'
+import Thired from './Pages/Thired'
 import CustomCursor from './Animations/CustomCursor';
 import ScrollEffect from './Animations/ScrollEffect';
 import ScrollFadeIn from './Animations/ScrollFadeIn';
@@ -68,6 +69,7 @@ function App() {
        <ScrollFadeIn><Nav /></ScrollFadeIn>
        <ScrollFadeIn><Main /></ScrollFadeIn>
        <ScrollFadeIn><Secondsection /></ScrollFadeIn>
+       <ScrollFadeIn><Thired /></ScrollFadeIn>
      </>
       )}
     </div>
